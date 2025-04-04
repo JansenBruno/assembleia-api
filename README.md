@@ -29,7 +29,9 @@ git clone https://github.com/seu-usuario/assembleia-api.git
 cd assembleia-api
 
 ```
+```
 docker-compose up -d
+```
 ```
 mvn clean install
 mvn spring-boot:run
