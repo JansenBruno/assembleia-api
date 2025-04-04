@@ -33,7 +33,8 @@ public class ResultadoService {
         ResultadoResponseDTO resultado = new ResultadoResponseDTO();
         resultado.setVotosSim(votosSim);
         resultado.setVotosNao(votosNao);
-        resultado.setTotalVotos((long) pauta.getSessao().getVotos().size());
+        resultado.setTotalVotos(pauta.getSessao().getVotos().size());
+
 
         return resultado;
     }

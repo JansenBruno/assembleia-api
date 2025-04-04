@@ -2,8 +2,12 @@ package com.desafio.assembleia_api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Voto {
     @Id
@@ -18,5 +22,11 @@ public class Voto {
     private String cpfAssociado;
 
     @Column(nullable = false)
-    private Boolean voto; // true = Sim, false = Não
+    private Boolean voto; // true = Sim or false = Não
+
+    public Voto(Sessao sessao, String cpfAssociado, Boolean voto) {
+        this.sessao = sessao;
+        this.cpfAssociado = cpfAssociado;
+        this.voto = voto;
+    }
 }

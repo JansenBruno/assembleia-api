@@ -1,5 +1,6 @@
 package com.desafio.assembleia_api.service;
 
+
 import com.desafio.assembleia_api.dto.CpfResponseDTO;
 import com.desafio.assembleia_api.exception.CpfException;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,11 +52,17 @@ public class CpfService {
         return response;
     }
 
-    private static class ReceitawsResponse {
-        private String situacao;
+
+    public static class ReceitawsResponse {
+        public String situacao;
 
         public String getSituacao() {
             return situacao;
         }
+
+        public void setSituacao(String situacao) {
+            this.situacao = situacao;
+        }
     }
+
 }

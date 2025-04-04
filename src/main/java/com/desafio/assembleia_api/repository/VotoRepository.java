@@ -1,4 +1,3 @@
-// repository/VotoRepository.java
 package com.desafio.assembleia_api.repository;
 
 import com.desafio.assembleia_api.model.Voto;

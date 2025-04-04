@@ -17,13 +17,17 @@ public class VotoController {
         this.votoService = votoService;
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void registrarVoto(@RequestBody VotoRequestDTO request) throws CpfException {
+        CpfResponseDTO cpfResponse = votoService.verificarSePodeVotar(request.getCpf());
+
+        if (!"ABLE_TO_VOTE".equals(cpfResponse.getStatus())) {
+            throw new CpfException("Associado não está habilitado para votar");
+        }
+
         votoService.registrarVoto(request);
     }
-
 
     @GetMapping("/verificar/{cpf}")
     public CpfResponseDTO verificarSePodeVotar(@PathVariable String cpf) throws CpfException {
