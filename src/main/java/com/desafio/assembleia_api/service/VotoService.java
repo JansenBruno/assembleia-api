@@ -27,7 +27,6 @@ public class VotoService {
         this.cpfService = cpfService;
     }
 
-    // ✅ Novo método para verificar se o CPF pode votar
     public CpfResponseDTO verificarSePodeVotar(String cpf) throws CpfException {
         return cpfService.validarCpf(cpf);
     }
@@ -48,7 +47,6 @@ public class VotoService {
             throw new BusinessException("Este CPF já votou nesta sessão");
         }
 
-        // ✅ A validação do CPF agora acontece no Controller antes de chamar registrarVoto()
 
         Voto voto = new Voto();
         voto.setSessao(sessao);
