@@ -30,6 +30,8 @@ cd assembleia-api
 
 ```
 ```
+
+## Ps: ainda estou finalizando os criterios extras da aplicação
 docker-compose up -d
 ```
 ```
