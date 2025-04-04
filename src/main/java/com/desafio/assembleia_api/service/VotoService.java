@@ -27,7 +27,12 @@ public class VotoService {
         this.cpfService = cpfService;
     }
 
-    public Voto registrarVoto(VotoRequestDTO request) throws CpfException {
+    // ✅ Novo método para verificar se o CPF pode votar
+    public CpfResponseDTO verificarSePodeVotar(String cpf) throws CpfException {
+        return cpfService.validarCpf(cpf);
+    }
+
+    public Voto registrarVoto(VotoRequestDTO request) {
         Sessao sessao = sessaoRepository.findById(request.getIdSessao())
                 .orElseThrow(() -> new NotFoundException("Sessão não encontrada"));
 
@@ -36,17 +41,14 @@ public class VotoService {
         }
 
         if (!CpfValidator.isValid(request.getCpf())) {
-            throw new CpfException("CPF inválido");
+            throw new NotFoundException("CPF inválido");
         }
 
         if (votoRepository.existsBySessaoIdAndCpfAssociado(request.getIdSessao(), request.getCpf())) {
             throw new BusinessException("Este CPF já votou nesta sessão");
         }
 
-        CpfResponseDTO cpfResponse = cpfService.validarCpf(request.getCpf());
-        if (!"ABLE_TO_VOTE".equals(cpfResponse.getStatus())) {
-            throw new BusinessException("Associado não está habilitado para votar");
-        }
+        // ✅ A validação do CPF agora acontece no Controller antes de chamar registrarVoto()
 
         Voto voto = new Voto();
         voto.setSessao(sessao);
@@ -54,12 +56,5 @@ public class VotoService {
         voto.setVoto(request.getVoto());
 
         return votoRepository.save(voto);
-    }
-
-    public CpfResponseDTO verificarSePodeVotar(String cpf) throws CpfException {
-        if (!CpfValidator.isValid(cpf)) {
-            throw new CpfException("CPF inválido");
-        }
-        return cpfService.validarCpf(cpf);
     }
 }
