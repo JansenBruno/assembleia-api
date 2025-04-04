@@ -1,10 +1,15 @@
 package com.desafio.assembleia_api.dto;
 
-import lombok.Data;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ResultadoResponseDTO {
-    private Long votosSim;
-    private Long votosNao;
-    private Long totalVotos;
+    private Long idPauta;
+    private long votosSim;
+    private long votosNao;
+    private long totalVotos;
+    private String resultado;
 }
